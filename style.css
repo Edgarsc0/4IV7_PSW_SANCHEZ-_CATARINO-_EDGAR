@@ -1,0 +1,53 @@
+*{
+    background-color: #5757FF;
+}
+@keyframes animacion-text{
+    from{
+        letter-spacing: 0px;
+    }
+    to{
+        letter-spacing: 20px;
+    }
+}
+@keyframes animation2-text{
+    from{
+        color: aqua;
+    }
+    to{
+        color:chartreuse;
+    }
+}
+body{
+    align-items: center;
+}
+.title{
+    border: 1px solid #3923D6;
+    text-align: center;
+    color: white;
+    background-color: #3923D6;
+}
+.encabezado{
+    background-color: #3923D6;
+    font-family: monospace;
+    font-size: 25px;
+}
+.main{
+    text-align: left;
+    margin: 4.5rem;
+    margin-top: 5px;
+    color: white;
+}
+a{
+    color:aqua;
+    animation: animation2-text 2s alternate infinite;
+}
+.content{
+    font-size: 50px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    animation: animacion-text 3s alternate infinite;
+}
+.lc{
+    margin-top: 10px;
+    font-size: 25px;
+    font-family: 'Courier New', Courier, monospace;
+}
