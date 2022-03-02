@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/validacion.js"></script>
+</head>
+<body>
+    <p>Todos los formularios de la web realizan 
+    metodos para enviar o recibir la informacion, los mas comunes son:
+    <h1>GET: </h1>Este metodo se encarga de enviar la informacion
+        por la url o salida estandar el navegador. Esto propicia que la seguridad
+        de la informacion no exista, ya que es visible.
+    <br>
+    <h1>POST: </h1>Este metodo se encarga de enviar la informacion por
+    la url de forma oculta, lo que ofrece cierto nivel de seguridad en el manejo de los
+    datos.
+    </p>
+    <br>
+    <form method="post" name="formulario" 
+    onsubmit="return validar(this)" action="">
+        <label>Nombre: </label>
+        <br>
+        <input type="text" name="nombre" id="nombre">
+        <br>
+        <label>Edad: </label>
+        <br>
+        <input type="text" name="edad" id="edad">
+        <br>
+        <label>Email: </label>
+        <br>
+        <input type="email" name="email" id="email">
+        <br>
+        <input type="submit" name="enviar" value="Enviar Datos">
+        <br>
+        <input type="reset" name="borrar" id="Borrar Datos">
+    </form>
+</body>
+</html>
