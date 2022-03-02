@@ -1,0 +1,123 @@
+*{
+    background-color:#121212;
+}
+@keyframes cambio-color{
+    from{
+        background-color: #121212;
+    }
+    to{
+        background-color:#303030 ;
+    }
+}
+@keyframes espaciado{
+    from{
+        letter-spacing: 0px;
+    }
+    to{
+        letter-spacing: 20px;
+    }
+}
+header{
+    /*border:1px solid white;*/
+    height: 102px;
+}
+.menu{
+    display: flex;
+}
+.quienes_somos,.que_hacemos,.que_vendemos,.proximas_entregas,.contacto{
+    border:1px solid white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 80px;
+    width: 20%;
+    margin-left:5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 10px;
+    animation: cambio-color 2s alternate infinite;
+}
+h4,a{
+    color:#7DDFEE;
+    font-family:Trebuchet MS;
+    font-weight: 30px;
+    font-size: 20px;
+    animation: cambio-color 2s alternate infinite;
+}
+h1{
+    background-color:#FF69B4;
+    color:#121212;
+    text-align: center;
+    font-family: monospace;
+    font-size: 50px;
+    animation: espaciado 2s alternate infinite;
+}
+.main{
+    /*border: 1px solid white;*/
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+.div1{
+    /*border: 1px solid white;*/
+    width: 50%;
+    display:flex;
+    justify-content: right;
+    margin-right: 5px;
+}
+.div2{
+    /*border: 1px solid white;*/
+    width: 50%;
+    display:flex;
+    justify-content: left;
+    margin-left: 5px;
+}
+.txt{
+    /*border: 1px solid white;*/
+    width: 70%;
+    text-align: center;
+    font-family: Comic Sans MS;
+    color:#FF69B4;
+    letter-spacing: 10px;
+}
+.content{
+    color:white;
+    letter-spacing: 0px;
+    font-family: monospace;
+    font-size: 150%;
+}
+.img1{
+    /*border: 1px solid white;*/
+    width: 100%;
+    background-image: url("p2.png");
+    height: 500px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.img2{
+    /*border: 1px solid white;*/
+    width: 100%;
+    background-image: url("p3.jpg");
+    height: 500px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.img3{
+    /*border: 1px solid white;*/
+    width: 100%;
+    background-image: url("P3.png");
+    height: 500px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.img4{
+    /*border: 1px solid white;*/
+    width: 100%;
+    background-image: url("gpu.png");
+    height: 500px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
