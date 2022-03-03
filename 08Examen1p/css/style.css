@@ -6,7 +6,6 @@
 .table{
     align-items: center;
     border: 2px solid #A763F6;
-    margin-top: 150px;
     border-radius: 5px;
     border-spacing: 5px;
     height: 100px;
@@ -59,4 +58,7 @@ footer{
 }
 .p1{
     background-color: #000000;
+}
+.tablediv{
+    width: 100%;
 }
