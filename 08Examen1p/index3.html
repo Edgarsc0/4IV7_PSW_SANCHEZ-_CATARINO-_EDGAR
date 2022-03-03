@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <!--<label>Costo</label>
+    <input type="number" id="costo">
+    <br>
+    <label>Enganche</label>
+    <input type="number" id="eng">
+    <br>
+    <div id="pr"></div>
+    <button onclick="escribir()">escribir</button>-->
+    <div class="content">
+        <div class="encabezado">
+            <h1>EXAMEN 1er PARCIAL</h1>
+        </div>
+        <h2>Requerimientos</h2>
+        <p class="p">Se deberá de crear una tabla dinámica con HTML + CSS3 + JavaScript para el cálculo de interés compuesto para la compra de un automóvil considerando los siguientes elementos:
+
+ 
+
+            Valor del Automóvil (Deberá de ingresarlo el usuario el rango de valores es de 100,000.00 a 1,000,000.00)
+            
+            Cuota inicial (Deberá de ingresarlo el usuario y su valor mínimo es de 10% del valor del automóvil)
+            
+            Periodo (Es el número de meses con que se podra liquidar el valor del automóvil las opciones son 3, 6, 9, 12, 18 meses)
+            
+            Interés 3,94% (Se deberá de realizar el cálculo correspondiente del valor del interés).
+            
+            Cuota (Es el valor del pago fijo que se deberá de efectuar de forma mensual).
+            
+            Considere la siguiente formula:
+            
+             
+            
+            S =P(1 + I)n
+            
+            S es el valor futuro del crédito, es decir, el valor inicial del crédito más los intereses capitalizados.
+            P es el valor presente del crédito, es decir, el valor inicial de crédito.
+            I es la tasa de interés expresada en decimales (5% = 0,05 que resulta de 5/100).
+            N es el periodo o número de meses de plazo del crédito.
+            https://www.gerencie.com/interes-compuesto.html
+            
+             
+            
+            Para realizar la evaluación del examen:
+            
+             
+            
+            Deberá de estar programado em Javascript y poder elegir con los botones para realizar el calculo del interés compuesto
+            
+            Deberá de tener un estilo único siguiendo las reglas de CSS y JavaScript
+            
+            Deberá de contener los datos del alumno en el footer
+            
+            Deberá de tener el enlace desde su index del repositorio programado.
+            
+            Deberá de tener una css con 3 colores base.
+            
+            Se debe validar la entrada del formulario acorde a las condiciones y lógica necesaria.
+            
+            El usuario podra modificar los valores del cálculo del interés compuesto según: elegir el periodo, cambiar los montos de la cuota inicial</p>
+    </div>
+    <table class="table" align="center">
+        <tr>
+            <thead>
+                <tr>
+                    <th class="thead">
+                        Costo
+                    </th>
+                    <th class="thead">
+                        Enganche
+                    </th>
+                    <th class="thead">
+                        Plazo
+                    </th>
+                    <th class="thead">
+                        Pago restante
+                    </th>
+                    <th class="thead">
+                        Pago por mes
+                    </th>
+                    <th class="thead">
+                        Valor futuro del credito (S)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="number" id="costo">
+                    </td>
+                    <td>
+                        <input type="number" id="eng">
+                    </td>
+                    <td>
+                        <select id="select">
+                        <option value="Select">Selecciona el plazo</option>
+                        <option value="3">3 Meses</option>
+                        <option value="6">6 Meses</option>
+                        <option value="9">9 Meses</option>
+                        <option value="12">12 Meses</option>
+                        <option value="18">18 Meses</option>
+                    </select>
+                    </td>
+                    <td>
+                        <div class="pr" id="pr"></div>
+                    </td>
+                    <td>
+                        <div class="ppm" id="ppm"></div>
+                    </td>
+                    <td>
+                        <div class="vfdc" id="vfdc"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </tr>
+    </table>
+    <div class="btn">
+        <button onclick="validar()" >Validar Informacion</button>
+    </div>
+    <script>
+        document.getElementById("pr").innerHTML="Llene los campos solicitados";
+        document.getElementById("ppm").innerHTML="Llene los campos solicitados";
+        document.getElementById("vfdc").innerHTML="Llene los campos solicitados";
+        function validar(){
+            enganche=document.getElementById("eng").value;
+            precio=document.getElementById("costo").value;
+            plazo=document.getElementById("select").value;
+            if(precio==""&&enganche==""&&plazo=="Select"){
+                alert("Debes llenar los campos solicitados")
+            }else{
+                if(precio<100000 || precio>1000000){
+                    alert("El precio del auto debe ser mayor a $100,000 pero menor a $1,000,000")
+                    return false;
+                }
+                if(enganche<precio*0.1){
+                    alert("El enganche debe ser mayor al 10% del precio del auto")
+                    return false;
+                }
+                todoesvalido=false;
+                if(!todoesvalido){
+                    if(precio==""||enganche==""||plazo=="Select"){
+                        alert("Hace falta informacion")
+                    }else{
+                        s=enganche*((1.0394)**(plazo));
+                        document.getElementById("pr").innerHTML="Pago restante: $"+(precio-enganche);
+                        document.getElementById("ppm").innerHTML="Pago por mes: $"+((precio-enganche)/plazo);
+                        document.getElementById("vfdc").innerHTML="Sera de $"+s;
+                    }
+                }
+            }
+        }
+        /*function escribir(){
+            enganche=document.getElementById("eng").value;
+            precio=document.getElementById("costo").value;
+            document.getElementById("pr").innerHTML="Pago restante: $"+(precio-enganche);
+        }*/
+    </script>
+    <footer>
+        <p class="p1">Programacion y Servicios Web</p>
+        <p class="p1">Sanchez Catarino Edgar</p>
+        <p class="p1">4IV7</p>
+    </footer>
+</body>
+</html>
