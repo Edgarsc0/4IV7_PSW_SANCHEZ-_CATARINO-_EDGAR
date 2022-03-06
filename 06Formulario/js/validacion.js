@@ -63,9 +63,9 @@ function validar(formulario){
         formulario.edad.focus();
         return false;
     }
-    //var txt=formulario.email.value;
+    var txt=formulario.email.value;
     //crear expresion regular
-    //var b=/^[^@\s]+[^@\.\s]+(\.[^@\.\s]+)+$/;
-    //alert("Email "+(b.test(txt)?" ":"no ")+"valido");
-    //return b.test;
+    var b=/^[^@\s]+[^@\.\s]+(\.[^@\.\s]+)+$/;
+    alert("Email "+(b.test(txt)?" ":"no ")+"valido");
+    return b.test;
 }
