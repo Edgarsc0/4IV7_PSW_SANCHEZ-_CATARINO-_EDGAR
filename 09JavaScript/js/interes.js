@@ -6,18 +6,23 @@ function validarn(e){
     return patron.test(codigo);
 }
 function interes(){
-    var plazo=document.formulario.plazo.value;
+    var plazo=parseFloat(document.formulario.plazo.value);
     var valor=document.formulario.cantidad.value;
     var resul=parseInt(valor);
     var interes=(resul*0.037*plazo)/12;
     var total=interes+resul;
-    if(plazo<0){
-        alert("El plazo que ingresaste no es valido.");
-    }if(plazo<=48){
-        document.formulario.sueldoI.value="$"+total;
+    if(!Number.isInteger(plazo)){
+        alert("No valido");
     }else{
-        alert("El plazo debe ser menor a 48 meses");
+        if(plazo<0){
+            alert("El plazo que ingresaste no es valido.");
+        }if(plazo<=48){
+            document.formulario.sueldoI.value="$"+total;
+        }else{
+            alert("El plazo debe ser menor a 48 meses");
+        }
     }
+    
 }
 function borrard(){
     document.formulario.cantidad.value="";
@@ -54,6 +59,7 @@ function borrard6(){
     document.form6.d.value="";
     document.form6.select.value="Select";
     document.form6.a.value="";
+    document.getElementById("salida").value="";
 }
 function validar_ventas(){
     var venta1=parseInt(document.form2.v1.value);
@@ -78,11 +84,11 @@ function validar_compra(){
     }
 }
 function validar_cals(){
-    var p1=parseInt(document.form4.p1.value);
-    var p2=parseInt(document.form4.p2.value);
-    var p3=parseInt(document.form4.p3.value);
-    var cef=parseInt(document.form4.cef.value);
-    var ctf=parseInt(document.form4.ctf.value);
+    var p1=parseFloat(document.form4.p1.value);
+    var p2=parseFloat(document.form4.p2.value);
+    var p3=parseFloat(document.form4.p3.value);
+    var cef=parseFloat(document.form4.cef.value);
+    var ctf=parseFloat(document.form4.ctf.value);
     if(p1<0 || p2<0 || p3<0 || cef<0 || 
         ctf<0 || p1>10 || p2>10 || p3>10 || cef>10 || ctf>10){
         alert("Verifica la informacion introducida");
@@ -91,10 +97,10 @@ function validar_cals(){
     }
 }
 function validar_c(){
-    var hombres=parseInt(document.form5.h.value);
-    var mujeres=parseInt(document.form5.m.value);
+    var hombres=parseFloat(document.form5.h.value);
+    var mujeres=parseFloat(document.form5.m.value);
     var total=hombres+mujeres;
-    if(hombres<0 || mujeres<0){
+    if(hombres<0||mujeres<0||!Number.isInteger(hombres)||!Number.isInteger(mujeres)){
         alert("Verifica la informacion introducida");
     }else{
         document.form5.ph.value=(100*hombres)/total + "%";
@@ -102,41 +108,102 @@ function validar_c(){
     }
 }
 function validar_n(){
-    var dia=parseInt(document.form6.d.value);
-    var año=parseInt(document.form6.a.value);
-    var mes=parseInt(document.form6.select.value);
+    var dia=parseFloat(document.form6.d.value);
+    var año=parseFloat(document.form6.a.value);
+    var mes=parseFloat(document.form6.select.value);
+    var todoesvalido=true;
     fecha_actual=new Date();
-    if(dia<0||dia>31||año<0||año>fecha_actual.getFullYear){
-        alert("Verifica la informacion introducida");
+    fecha_nac=new Date(año,mes-1,dia);
+    if(!Number.isInteger(dia)||!Number.isInteger(mes)
+    ||!Number.isInteger(año)||fecha_actual<fecha_nac){
+        alert("No valido");
     }else{
-        fecha_nac=new Date(año,mes,dia);
-        if(fecha_actual<fecha_nac){
-            alert("Introduza datos validos");
-        }else{
-            var años=fecha_actual.getFullYear()-fecha_nac.getFullYear();
-            var meses=0;
+        if(mes==1 && dia>=32){//enero
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==2 && dia>=29 && año%4!=0){//febrero sin ser bisiesto
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==2 && dia==29 && año%4==0){
+            todoesvalido=true;
+        }if(mes==2 && dia>29 && año%4==0){//febrero siendo bisiesto
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==3 && dia>=32){//marzo
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==4 && dia>=31){//abril
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==5 && dia>=32){//mayo
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==6 && dia>=31){//junio
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==7 && dia>=32){//julio
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==8 && dia>=32){//agosto
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==9 && dia>=31){//sept
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==10 && dia>=32){//oct
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==11 && dia>=31){//nov
+            alert("No valido");
+            todoesvalido=false;
+        }if(mes==12 && dia>=32){//dic
+            alert("No valido");
+            todoesvalido=false;
+        }if(todoesvalido==true){
+            //calcular años cumplidos
+            var dif_años=fecha_actual.getFullYear()-fecha_nac.getFullYear();
             if(fecha_actual.getMonth()>fecha_nac.getMonth()){
-                meses=fecha_actual.getMonth()-fecha_nac.getMonth();
+                //alert(años);
+                var años_cumplidos=dif_años;
+            }if(fecha_actual.getMonth()<fecha_nac.getMonth()){
+                //alert(años-1);
+                var años_cumplidos=dif_años-1;
+            }if(fecha_actual.getMonth()==fecha_nac.getMonth()
+            &&fecha_actual.getDate()==fecha_nac.getDate()){
+                //alert(años);
+                var años_cumplidos=dif_años;
+            }if(fecha_actual.getMonth()==fecha_nac.getMonth()
+            &&fecha_actual.getDate()>fecha_nac.getDate()){
+                //alert(años);
+                var años_cumplidos=dif_años;
+            }if(fecha_actual.getMonth()==fecha_nac.getMonth()
+            &&fecha_actual.getDate()<fecha_nac.getDate()){
+                //alert(años-1);
+                var años_cumplidos=dif_años-1;
+            }
+            //calcular meses cumplidos
+            if(fecha_actual.getMonth()>fecha_nac.getMonth()){
+                var meses=fecha_actual.getMonth()-fecha_nac.getMonth();
             }else if(fecha_actual.getMonth()<fecha_nac.getMonth()){
-                meses=12-(fecha_nac.getMonth()-fecha_actual.getMonth());
-            }else if(fecha_actual.getMonth()==fecha_nac.getMonth() && 
-            fecha_actual.getDate()>fecha_nac.getDate()){
-                if(fecha_actual.getMonth()-fecha_nac.getMonth()==0){
-                    meses=0;
-                }else{
-                    meses=11;
-                }
+                var meses=12-(fecha_nac.getMonth()-fecha_actual.getMonth());
+            }else if(fecha_actual.getMonth()==fecha_nac.getMonth()
+            &&fecha_actual.getDate()>fecha_nac.getDate()
+            ){
+                var meses=0;
+            }else{
+                var meses=11;
             }
-        }
-        var m=parseInt(meses);
-        var cuenta=0;
-        for(i=fecha_nac.getFullYear();i<=fecha_actual.getFullYear();i++){
-            if((i%4==0 && i%100!=0)||i%400==0){
-                cuenta++;
-                i+=3;
+            //calcular dias cumplidos
+            var contador=0;
+            for(i=fecha_nac.getFullYear();i<=fecha_actual.getFullYear();i++){
+                if(i%4==0){
+                    contador++;
+                }else{}
             }
+            document.form6.salida.value="Tienes "+años_cumplidos+" años cumplidos, "+meses
+            +" meses cumplidos, "+(fecha_actual.getDate()+contador)+" dias cumplidos contando años bisiestos";
+           //alert(años_cumplidos+"/"+meses+"/"+(fecha_actual.getDate()+contador));
         }
-        var d=parseInt(fecha_actual.getDate());
-        alert("A"+años+"/"+"M"+(m+1)+"/"+"D"+(d+cuenta));
     }
 }
+
