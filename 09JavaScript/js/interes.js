@@ -21,8 +21,7 @@ function interes(){
         }else{
             alert("El plazo debe ser menor a 48 meses");
         }
-    }
-    
+    }    
 }
 function borrard(){
     document.formulario.cantidad.value="";
@@ -124,8 +123,35 @@ function validar_n(){
         }if(mes==2 && dia>=29 && año%4!=0){//febrero sin ser bisiesto
             alert("No valido");
             todoesvalido=false;
-        }if(mes==2 && dia==29 && año%4==0){
-            todoesvalido=true;
+        }if(mes==2 && dia==29 && año%4==0 && año<=fecha_actual.getFullYear()){
+            var años_cumplidos=0;
+            //alert(años_bisiestos());
+            if(fecha_actual.getMonth()==1
+            && fecha_actual.getDate()==29){
+                años_cumplidos=años_bisiestos();               
+            }if(fecha_actual.getMonth()==1
+            && fecha_actual.getDate()<29){
+                años_cumplidos=años_bisiestos()-1;
+            }if(fecha_actual.getMonth()>1){
+                años_cumplidos=años_bisiestos();
+                //alert(años_cumplidos);
+            }if(fecha_actual.getMonth()<1){
+                años_cumplidos=años_bisiestos()-1;
+            }
+            if(fecha_actual.getMonth()>fecha_nac.getMonth()){
+                var meses=fecha_actual.getMonth()-fecha_nac.getMonth();
+            }else if(fecha_actual.getMonth()<fecha_nac.getMonth()){
+                var meses=12-(fecha_nac.getMonth()-fecha_actual.getMonth());
+            }else if(fecha_actual.getMonth()==fecha_nac.getMonth()
+            &&fecha_actual.getDate()>fecha_nac.getDate()
+            ){
+                var meses=0;
+            }else{
+                var meses=11;
+            }
+            document.form6.salida.value="Años: "+años_cumplidos+" Meses: "+meses
+            +" Dias: "+fecha_actual.getDate();
+            todoesvalido=false;
         }if(mes==2 && dia>29 && año%4==0){//febrero siendo bisiesto
             alert("No valido");
             todoesvalido=false;
@@ -160,6 +186,7 @@ function validar_n(){
             alert("No valido");
             todoesvalido=false;
         }if(todoesvalido==true){
+            //alert(fecha_actual.getMonth());
             //calcular años cumplidos
             var dif_años=fecha_actual.getFullYear()-fecha_nac.getFullYear();
             if(fecha_actual.getMonth()>fecha_nac.getMonth()){
@@ -200,10 +227,20 @@ function validar_n(){
                     contador++;
                 }else{}
             }
+            var dias_meses=[31,28,31,30,31,30,31,31,30,31,30,31]
+            var dias_cumplidos=dias_meses[fecha_actual.getMonth()]-fecha_nac.getDate()+fecha_actual.getDate()+contador;
             document.form6.salida.value="Tienes "+años_cumplidos+" años cumplidos, "+meses
-            +" meses cumplidos, "+(fecha_actual.getDate()+contador)+" dias cumplidos contando años bisiestos";
+            +" meses cumplidos, "+dias_cumplidos+" dias cumplidos contando años bisiestos";
            //alert(años_cumplidos+"/"+meses+"/"+(fecha_actual.getDate()+contador));
         }
     }
 }
-
+function años_bisiestos(){
+    var contador=0;
+    for(i=fecha_nac.getFullYear();i<=fecha_actual.getFullYear();i++){
+        if(i%4==0){
+            contador++;
+        }
+    }
+    return contador;
+}
