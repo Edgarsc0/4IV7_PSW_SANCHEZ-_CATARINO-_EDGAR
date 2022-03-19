@@ -114,7 +114,7 @@ function validar_n(){
     fecha_actual=new Date();
     fecha_nac=new Date(año,mes-1,dia);
     if(!Number.isInteger(dia)||!Number.isInteger(mes)
-    ||!Number.isInteger(año)||fecha_actual<fecha_nac){
+    ||!Number.isInteger(año)||fecha_actual<fecha_nac||fecha_actual.getFullYear()<fecha_nac.getFullYear()){
         alert("No valido");
     }else{
         if(mes==1 && dia>=32){//enero
