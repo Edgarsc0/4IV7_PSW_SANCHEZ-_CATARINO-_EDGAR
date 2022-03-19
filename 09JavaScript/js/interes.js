@@ -114,7 +114,8 @@ function validar_n(){
     fecha_actual=new Date();
     fecha_nac=new Date(año,mes-1,dia);
     if(!Number.isInteger(dia)||!Number.isInteger(mes)
-    ||!Number.isInteger(año)||fecha_actual<fecha_nac||fecha_actual.getFullYear()<fecha_nac.getFullYear()){
+    ||!Number.isInteger(año)||fecha_actual<fecha_nac
+    ||dia==0||año==0){
         alert("No valido");
     }else{
         if(mes==1 && dia>=32){//enero
@@ -229,8 +230,15 @@ function validar_n(){
             }
             var dias_meses=[31,28,31,30,31,30,31,31,30,31,30,31]
             var dias_cumplidos=dias_meses[fecha_actual.getMonth()]-fecha_nac.getDate()+fecha_actual.getDate()+contador;
-            document.form6.salida.value="Tienes "+años_cumplidos+" años cumplidos, "+meses
-            +" meses cumplidos, "+dias_cumplidos+" dias cumplidos contando años bisiestos";
+            var resul=[años_cumplidos,meses,dias_cumplidos];
+            //alert(resul);
+            if(resul.includes(NaN)||resul.includes(undefined)){
+                alert("Revisa la informacion");
+            }else{
+                document.form6.salida.value="Tienes "+resul[0]+" años, "+resul[1]+" meses cumplidos, "+resul[2]+" dias cumplidos";
+            }
+            /*document.form6.salida.value="Tienes "+años_cumplidos+" años cumplidos, "+meses
+            +" meses cumplidos, "+dias_cumplidos+" dias cumplidos contando años bisiestos";*/
            //alert(años_cumplidos+"/"+meses+"/"+(fecha_actual.getDate()+contador));
         }
     }
