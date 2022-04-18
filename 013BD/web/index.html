@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>SAES xd</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            *{
+                background-color: #121212;
+                color:white;
+                font-family: monospace;
+                font-size: 35px;
+                text-align: center;
+            }
+            h1{
+                color:white;
+                background-color:#3700B3;
+                font-size: 40px;
+            }
+            input{
+                border: 1px solid white;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Consulta de alumnos</h1>
+            <a href="ConsultarAlumnos">Ver lista de alumno de batiz</a>
+        </div>
+        <hr>
+        <div class="registro">
+            <h1>Registrar nuevo alumno de Batiz</h1>
+            <form method="post" name="registro" action="RegistrarAlumno">
+                <label>Nombre del alumno</label>
+                <input type="text" name="nombre" onkeypress="return validarStr(event)">
+                <br>
+                <label>Apellido paterno</label>
+                
+                <input type="text" name="appat" onkeypress="return validarStr(event)">
+                <br>
+                <label>Apellido materno</label>
+                
+                <input type="text" name="apmat" onkeypress="return validarStr(event)">
+                <br>
+                <label>Boleta</label>
+                
+                <input type="number" name="boleta" onkeypress="return validarInt(event)">
+                <br>
+                <label>Telefono</label>
+                
+                <input type="number" name="tel" onkeypress="return validarInt(event)">
+                <br>
+                <input type="submit" name="enviar" value="Registrar Nuevo Alumno">
+                <br>
+                <input type="reset" value="Borrar Datos">
+            </form>
+        </div>
+        <hr>
+        <div class="eliminar">
+            <h1>Eliminar alumno</h1>
+            <form method="get" name="eliminar" action="EliminarAlumno">
+                <label>Ingresar boleta del alumno que desea dar de baja</label>
+                <input type="text" name="eliminarboleta" onkeypress="return validarInt(event)">
+                <br>
+                <input type="submit" value="Alumno Eliminado">
+            </form>
+        </div>
+        <hr>
+        <div class="modificar">
+            <h1>Modificar datos de un alumno</h1>
+            <form method="post" name="modificar" action="ModificarAlumno">
+                <input type="submit" value="Mostrar alumnos">
+            </form>
+        </div>
+        <script>
+            function validarStr(e){
+                var teclado=(document.all)?e.keyCode:e.which;
+                if(teclado==8){return true;}
+                var patron=/[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,u,v,w,x,y,z, ,'\'s]/;
+                var codigo=String.fromCharCode(teclado);
+                return patron.test(codigo);
+            }
+            function validarInt(e){
+                var teclado=(document.all)?e.keyCode:e.which;
+                if(teclado==8){return true;}
+                var patron=/[0-9\d]/;
+                var codigo=String.fromCharCode(teclado);
+                return patron.test(codigo);
+            }
+        </script>
+    </body>
+</html>
