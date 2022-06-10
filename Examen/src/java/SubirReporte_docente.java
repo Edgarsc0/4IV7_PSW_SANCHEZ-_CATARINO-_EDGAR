@@ -29,7 +29,7 @@ public class SubirReporte_docente extends HttpServlet {
     public void init(ServletConfig cfg)throws ServletException{
         String URL="jdbc:mysql:3306//localhost/prueba10";
         String userName="root";
-        String password="Hal02012()";
+        String password="n0m3l0";
         try{
             Class.forName("com.mysql.jdbc.Driver");
             URL="jdbc:mysql://localhost/prueba10";

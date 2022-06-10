@@ -196,8 +196,25 @@ public class principal extends HttpServlet {
     "        <form method='post' action='ConsultarBitacora'>\n" +
                 "<input type='hidden' name='usu' value='"+request.getParameter("usu")+"'>"+
                 "<input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>"+         
-    "            <input class='btn' type='submit' value='Mostrar bitacora'>\n" +
-    "        </form>\n" +
+    "            <input class='btn' type='submit' value='Mostrar bitacora'><br>\n");
+            if(Integer.parseInt(request.getParameter("rol"))==2){
+                out.println("<label>Filtrar bitacora por: </label><br>"
+                        + "<select onchange='darFiltro(value)'>"
+                        + "<option>Escoja un filtro</option>"
+                        + "<option value='noSerie'>Numero de serie</option>"
+                        + "<optgroup label='Fallas'>"
+                        + "<option value='1'>Monitor</option>"
+                        + "<option value='2'>Mouse</option>"
+                        + "<option value='3'>CPU</option>"
+                        + "<option value='4'>Teclado</option>"
+                        + "<option value='5'>Camara</option>"
+                        + "<option value='6'>Software</option>"
+                        + "</optgroup>"
+                        + "</select>");
+                out.println("<div id='input'></div>");
+                
+            }
+            out.println("</form>\n" +
     "        </div>\n" +
     "            <div class=\"sol\">\n" +
     "                <h1>Solicitud de modificacion de datos o baja de datos del laboratorio</h1>\n" +
@@ -217,6 +234,17 @@ public class principal extends HttpServlet {
     "            </div>\n" +
     "        </div>\n" +
     "        <script>\n" +
+                "function darFiltro(v){"
+                                + "var div=document.getElementById('input');"
+                                + "switch(v){"
+                                + "case 'noSerie':"
+                                + "var input=document.createElement('INPUT');"
+                                + "input.setAttribute('placeholder','filtrar con numero de serie...');"
+                                + "input.setAttribute('name','filtro_nos');"
+                                + "div.appendChild(input);"
+                                + ""
+                                + "}"
+                                + "}"+
     "            function verificarForm(e){\n" +
     "                if(document.getElementById(\"bol0\").value<0||document.getElementById(\"bol0\").value.split('').length!==10){\n" +
     "                    e.preventDefault();\n" +
