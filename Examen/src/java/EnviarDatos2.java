@@ -29,12 +29,12 @@ public class EnviarDatos2 extends HttpServlet {
     private Statement set;
     private ResultSet rs;
     public void init(ServletConfig cfg)throws ServletException{
-        String URL="jdbc:mysql:3306//localhost/prueba7";
+        String URL="jdbc:mysql:3306//localhost/prueba10";
         String userName="root";
         String password="Hal02012()";
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            URL="jdbc:mysql://localhost/prueba7";
+            URL="jdbc:mysql://localhost/prueba10";
             con=DriverManager.getConnection(URL,userName, password);
             set=con.createStatement();
             System.out.println("Se concecto a la BD");
@@ -116,44 +116,48 @@ public class EnviarDatos2 extends HttpServlet {
             out.println("<body>");
             try{
                 /*String q="insert into reporte 
-                (dia,mes,anno,hora,descripcion,noSerie,boleta_reportante,id_componente) "
+                (dia,mes,anno,hora,descripcion,noSerie,usuario_reportante,id_componente) "
                 + "values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"',
                 '"+descripcion+"',"+noSerie+","+bol+","+id_comp+")";*/
                 String q;
                 switch(id_comp){
                     case 1:
-                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,boleta_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",1)";                        
+                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,usuario_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",1)";                        
                         set.executeUpdate(q);
                         out.println("<h1>Se subio el reporte</h1>");
                         break;
                     case 2:
-                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,boleta_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",2)";                        
+                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,usuario_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",2)";                        
                         set.executeUpdate(q);
                         out.println("<h1>Se subio el reporte</h1>");
                         break;
                     case 3:
-                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,boleta_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",3)";                        
+                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,usuario_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",3)";                        
                         set.executeUpdate(q);
                         out.println("<h1>Se subio el reporte</h1>");
                         break;
                     case 4:
-                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,boleta_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",4)";                        
+                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,usuario_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",4)";                        
                         set.executeUpdate(q);
                         out.println("<h1>Se subio el reporte</h1>");
                         break;
                     case 5:
-                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,boleta_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",5)";                        
+                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,usuario_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",5)";                        
                         set.executeUpdate(q);
                         out.println("<h1>Se subio el reporte</h1>");
                         break;
                     case 6:
-                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,boleta_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",6)";                        
+                        q="insert into reporte(dia,mes,anno,hora,descripcion,noSerie,usuario_reportante,id_componente) values("+dia+","+mes+","+dateYear+",'"+hora+":"+minutos+"','"+descripcion+"',"+noSerie+","+bol+",6)";                        
                         set.executeUpdate(q);
                         out.println("<h1>Se subio el reporte</h1>");
                         break;
                 }
                 //out.println("<h1>Se subio el reporte</h1>");
-                out.println("<a href='index.html'>Regresar a principal</a>");
+                out.println("<form method='post' action='principal'>"
+                                + "<input type='submit' value='Regresar a principal'>"
+                                + "<input type='hidden' name='usu' value='"+bol+"'>"
+                                +"<input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>"
+                                + "</form>");
             }catch(Exception e){
                 out.println("<h1>No se logro subir el reporte</h1>");
                 out.println("<h1>"+e.getMessage()+"</h1>");

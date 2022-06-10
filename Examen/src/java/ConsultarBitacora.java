@@ -26,12 +26,12 @@ public class ConsultarBitacora extends HttpServlet {
     private Statement set;
     private ResultSet rs;
     public void init(ServletConfig cfg)throws ServletException{
-        String URL="jdbc:mysql:3306//localhost/prueba7";
+        String URL="jdbc:mysql:3306//localhost/prueba10";
         String userName="root";
         String password="Hal02012()";
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            URL="jdbc:mysql://localhost/prueba7";
+            URL="jdbc:mysql://localhost/prueba10";
             con=DriverManager.getConnection(URL,userName, password);
             set=con.createStatement();
             System.out.println("Se concecto a la BD");
@@ -149,7 +149,7 @@ public class ConsultarBitacora extends HttpServlet {
                     dia=rs.getInt("dia");
                     mes=rs.getInt("mes");
                     año=rs.getInt("anno");
-                    boleta_r=rs.getInt("boleta_reportante");
+                    boleta_r=rs.getInt("usuario_reportante");
                     ns=rs.getInt("noSerie");
                     hora=rs.getString("hora");
                     descripcion=rs.getString("descripcion");
@@ -241,11 +241,16 @@ public class ConsultarBitacora extends HttpServlet {
                 }
                 out.println("</table>");
                 out.println("</div>");
+                
             }catch(Exception e){
                 out.println("<h1>Error1</h1>");
                 out.println("<h1>"+e.getMessage()+"</h1>");
             }
-            out.println("<a href='index.html'>Regresar a principal</a>");
+                                out.println("<form method='post' action='principal'>"
+                                + "<input type='submit' value='Regresar a principal'>"
+                                + "<input type='hidden' name='usu' value='"+request.getParameter("usu")+"'>"
+                                + "<input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>"           
+                                + "</form>");
             out.println("</body>");
             out.println("</html>");
         }

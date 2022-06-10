@@ -124,7 +124,7 @@ public class EnviarDatos extends HttpServlet {
                     currentAm=rs.getString("apmat");
                     currentTel=rs.getString("telefono");
                     arrBol.add(currentBol);
-                    arrNom.add(currentNom);
+                    arrNom.add(currentNom);                                        
                     arrAp.add(currentAp);
                     arrAm.add(currentAm);
                     arrTel.add(currentTel);

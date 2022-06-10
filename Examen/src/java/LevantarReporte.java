@@ -27,12 +27,12 @@ public class LevantarReporte extends HttpServlet {
     private Statement set;
     private ResultSet rs;
     public void init(ServletConfig cfg)throws ServletException{
-        String URL="jdbc:mysql:3306//localhost/prueba7";
+        String URL="jdbc:mysql:3306//localhost/prueba10";
         String userName="root";
         String password="Hal02012()";
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            URL="jdbc:mysql://localhost/prueba7";
+            URL="jdbc:mysql://localhost/prueba10";
             con=DriverManager.getConnection(URL,userName, password);
             set=con.createStatement();
             System.out.println("Se concecto a la BD");
@@ -122,7 +122,7 @@ public class LevantarReporte extends HttpServlet {
             
             out.println("<form method='post' action='EnviarDatos2'>");
             //out.println("<h1>Servlet LevantarReporte at " + request.getContextPath() + "</h1>");
-            int boleta=Integer.parseInt(request.getParameter("bol"));
+            int boleta=Integer.parseInt(request.getParameter("usu"));
             out.println("<div class='table'>");
             out.println("<table align='center' id='table'>"
                     + "<tr>"
@@ -132,14 +132,13 @@ public class LevantarReporte extends HttpServlet {
             try{
                 out.println("<h1>Estas son las computadoras que registraste:</h1>");
                 out.println("<p>Si la tabla esta vacia es posible que aun no"
-                        + " hayas llenado el formulario de registro de computadoras o ingresaste"
-                        + " erroneamente tu boleta: <input type='number' readonly='' name='bol' value='"+boleta+"'></p>");
+                        + " hayas llenado el formulario de registro de computadoras. <input type='hidden' readonly='' name='bol' value='"+boleta+"'></p>");
                 String lab;
                 int noSerie;
                 String q="select computadora.noSerie, laboratorio.nombre "
                         + "from computadora inner join laboratorio on "
                         + "computadora.id_lab=laboratorio.id_lab "
-                        + "where boleta="+boleta;
+                        + "where usuario="+boleta;
                 set=con.createStatement();
                 rs=set.executeQuery(q);
                 ArrayList <Integer> arrnoSerie=new ArrayList<>();
@@ -166,8 +165,13 @@ public class LevantarReporte extends HttpServlet {
             out.println("</div>");
             out.println("<div style='margin-top:10px' class='frm' id='frm'>"
                     + "</div>");
+            out.println("<input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>");
             out.println("</form>");
-            out.println("<a href='index.html'>Regresar a principal</a>");
+                                    out.println("<form method='post' action='principal'>"
+                                + "<input type='submit' value='Regresar a principal'>"
+                                + "<input type='hidden' name='usu' value='"+boleta+"'>"
+                                + "<input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>"
+                                + "</form>");
             out.println("<script>"
                     + "function error(){"
                     + "alert('Solo puedes realizar un reporte a la vez.');}"

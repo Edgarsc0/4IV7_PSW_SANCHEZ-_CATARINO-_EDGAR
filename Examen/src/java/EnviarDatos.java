@@ -37,12 +37,12 @@ public class EnviarDatos extends HttpServlet {
     private Statement set;
     private ResultSet rs;
     public void init(ServletConfig cfg)throws ServletException{
-        String URL="jdbc:mysql:3306//localhost/prueba7";
+        String URL="jdbc:mysql:3306//localhost/prueba10";
         String userName="root";
         String password="Hal02012()";
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            URL="jdbc:mysql://localhost/prueba7";
+            URL="jdbc:mysql://localhost/prueba10";
             con=DriverManager.getConnection(URL,userName, password);
             set=con.createStatement();
             System.out.println("Se concecto a la BD");
@@ -133,11 +133,11 @@ public class EnviarDatos extends HttpServlet {
             out.println("<body>");
             //out.println("<h1>Servlet EnviarDatos at " + request.getContextPath() + "</h1>");
             try{
-                String agregarAlumno="insert into alumno values ("+bol+",'"+nom+"','"+appat+"','"+apmat+"');";
+                String agregarAlumno="insert into nombres(usuario,nombre,appat,apmat) values ("+bol+",'"+nom+"','"+appat+"','"+apmat+"');";
                 set.executeUpdate(agregarAlumno);
-                out.println("<h1>Se registro el alumno</h1>");
+                out.println("<h1>Se registro el usuario</h1>");
                 try{
-                    String agregarGrupo="insert into grupo(grupo,boleta) values('"+grp+"',"+bol+");";
+                    String agregarGrupo="insert into grupo(grupo,usuario) values('"+grp+"',"+bol+");";
                     set.executeUpdate(agregarGrupo);
                     out.println("<h1>Se agrego el grupo</h1>");
                     try{
@@ -153,19 +153,19 @@ public class EnviarDatos extends HttpServlet {
                                 for(int i=0;i<3;i++){
                                     switch(labs.get(i)){
                                         case "LBD":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",1)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",1)";
                                             set.executeUpdate(q);
                                             break;
                                         case "LNV":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",2)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",2)";
                                             set.executeUpdate(q);
                                             break;
                                         case "LDS":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",3)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",3)";
                                             set.executeUpdate(q);
                                             break;
                                         case "4.0":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",4)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",4)";
                                             set.executeUpdate(q);
                                             break;
                                     }
@@ -180,19 +180,19 @@ public class EnviarDatos extends HttpServlet {
                                 for(int i=0;i<4;i++){
                                     switch(labs.get(i)){
                                         case "LBD":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",1)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",1)";
                                             set.executeUpdate(q);
                                             break;
                                         case "LNV":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",2)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",2)";
                                             set.executeUpdate(q);
                                             break;
                                         case "LDS":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",3)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",3)";
                                             set.executeUpdate(q);
                                             break;
                                         case "4.0":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",4)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",4)";
                                             set.executeUpdate(q);
                                             break;
                                     }
@@ -207,19 +207,19 @@ public class EnviarDatos extends HttpServlet {
                                 for(int i=0;i<5;i++){
                                     switch(labs.get(i)){
                                         case "LBD":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",1)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",1)";
                                             set.executeUpdate(q);
                                             break;
                                         case "LNV":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",2)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",2)";
                                             set.executeUpdate(q);
                                             break;
                                         case "LDS":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",3)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",3)";
                                             set.executeUpdate(q);
                                             break;
                                         case "4.0":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",4)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",4)";
                                             set.executeUpdate(q);
                                             break;
                                     }
@@ -234,19 +234,19 @@ public class EnviarDatos extends HttpServlet {
                                 for(int i=0;i<5;i++){
                                     switch(labs.get(i)){
                                         case "LBD":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",1)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",1)";
                                             set.executeUpdate(q);
                                             break;
                                         case "LNV":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",2)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",2)";
                                             set.executeUpdate(q);
                                             break;
                                         case "LDS":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",3)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",3)";
                                             set.executeUpdate(q);
                                             break;
                                         case "4.0":
-                                            q="insert into computadora(noSerie,boleta,id_lab) values("+noSerie.get(i)+","+bol+",4)";
+                                            q="insert into computadora(noSerie,usuario,id_lab) values("+noSerie.get(i)+","+bol+",4)";
                                             set.executeUpdate(q);
                                             break;
                                     }
@@ -254,7 +254,11 @@ public class EnviarDatos extends HttpServlet {
                                 out.println("<h1>Se enviaron los numeros de serie</h1>");
                                 break;
                         }
-                        out.println("<a href='index.html'>Regresar a principal</a>");
+                        out.println("<form method='post' action='principal'>"
+                                + "<input type='submit' value='Regresar a principal'>"
+                                + "<input type='hidden' name='usu' value='"+bol+"'>"
+                                +" <input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>"
+                                + "</form>");
                     }catch(Exception e){
                        out.println("<h1>Error al enviar los numeros de serie</h1>");
                        out.println("<h1>"+e.getMessage()+"</h1>");

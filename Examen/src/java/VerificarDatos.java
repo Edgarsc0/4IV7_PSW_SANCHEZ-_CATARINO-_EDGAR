@@ -5,7 +5,12 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +23,32 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/VerificarDatos"})
 public class VerificarDatos extends HttpServlet {
-
+    private Connection con;
+    private Statement set;
+    private ResultSet rs;
+    public void init(ServletConfig cfg)throws ServletException{
+        String URL="jdbc:mysql:3306//localhost/prueba10";
+        String userName="root";
+        String password="Hal02012()";
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            URL="jdbc:mysql://localhost/prueba10";
+            con=DriverManager.getConnection(URL,userName, password);
+            set=con.createStatement();
+            System.out.println("Se concecto a la BD");
+        }catch(Exception e){
+            System.out.println("No se logro conectarse a la BD");
+            System.out.println(e.getMessage());
+            System.out.println(e.getStackTrace());
+        }
+    }
+    public void destroy(){
+        try{
+            con.close();
+        }catch(Exception e){
+            super.destroy();
+        }
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -199,6 +229,8 @@ public class VerificarDatos extends HttpServlet {
             out.println("<h1>"+lab+"</h1>");*/
             out.println("<div class='main'>");
                 out.println("<form action='EnviarDatos' method='post'>");
+                out.println("<input type='hidden' name='usu' value='"+boleta+"'>"
+                                +"<input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>");
                 out.println("<div class='table'>");
                 out.println("<table align='center'>"
                         + "<tr>"
@@ -322,8 +354,12 @@ public class VerificarDatos extends HttpServlet {
                     + "e.preventDefault();alert('No se envio el formulario');}else{}}");
             out.println("</script>");
             out.println("<input type='submit' onclick='validarForm(event)' value='Enviar datos'><input type='button' onclick='cancelar()' value='Cancelar'>");
-            out.println("<a href='index.html'>Regresar a principal</a>");
             out.println("</form>");
+                                out.println("<form method='post' action='principal'>"
+                                + "<input type='submit' value='Regresar a principal'>"
+                                + "<input type='hidden' name='usu' value='"+boleta+"'>"
+                                +"<input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>"
+                                + "</form>");
             out.println("</body>");
             out.println("</html>");
         }

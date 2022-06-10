@@ -123,6 +123,7 @@ public class LlenarFormato extends HttpServlet {
                     out.println("<title>Servlet LlenarFormato</title>");            
                 out.println("</head>");
                 out.println("<body>");
+                String usu=request.getParameter("usuario");
                     out.println("<div class='formato'>");
                         out.println("<image src='i4.png'>");
                         out.println("<div class='txt'>");
@@ -133,7 +134,7 @@ public class LlenarFormato extends HttpServlet {
                                     + " <input onkeypress='return validarString(event)' type='text' name='appat' id='appat' placeholder='Apellido Paterno'>"
                                     + " <input onkeypress='return validarString(event)' type='text' name='apmat' id='apmat' placeholder='Apellido Materno'> alumno (a)"
                                     + " del CECyT 9 'Juan de dios Batiz', inscrito en el grupo <input readonly='readonly' id='semestre' name='grupo' value='"+grupo+"'>"
-                                    + " de la carrera Técnico en Programacion, con numero de boleta <input placeholder='Boleta' onkeypress='return validarInt(event)' type='number' min='0' max='9999999999' id='bol' name='bol'>, y con"
+                                    + " de la carrera Técnico en Programacion, con numero de boleta <input placeholder='Boleta' readonly='' id='bol' name='bol' value='"+usu+"'>, y con"
                                     + " fundamento en lo expresado en el articulo 107, fracciones IX y X , y en el articulo 108 fracción"
                                     + " IX del Reglamento inerno del Instituto Politécnico Nacional, manifiesto mi compromiso de cuidar y hacer"
                                     + " buen uso de los equipos de cómputo (CPU, monitor, teclado, mouse, y demás componentes del mismo), que me"
@@ -441,8 +442,14 @@ public class LlenarFormato extends HttpServlet {
                                 out.println("}");
                                 out.println("function error(){alert('Solo puede existir un registro en cada fila.');}");
                             out.println("</script>");
+                            out.println("<input type='hidden' name='usu' value='"+usu+"'>"
+                                +"<input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>");
                         out.println("</form>");
-                        out.println("<a href='index.html'>Regresar a principal</a>");
+                        out.println("<form method='post' action='principal'>"
+                                + "<input type='submit' value='Regresar a principal'>"
+                                + "<input type='hidden' name='usu' value='"+usu+"'>"
+                                +"<input type='hidden' name='rol' value='"+request.getParameter("rol")+"'>"
+                                + "</form>");
                     out.println("</div>");
                 out.println("</body>");
             out.println("</html>");

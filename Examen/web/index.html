@@ -8,212 +8,80 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            .main{
-                border: 5px solid #2F2F2F;
-                background-color: #2F2F2F;
-                width: 50%;
-            }
-            .inpClass{
-                margin-left: 10px;
-            }
-            .btn{
-                margin-left: 10px
-            }
-            *{
-                background-color:#111111;
-                color:white;
-                font-family: monospace;
-                text-align: center;
-            }
-            .btn{
-                background-color: #FFCB74;
-                color: #111111;
-                border: 0;
-                height: 35px;
-                font-family: arial black;
-                border-radius: 10px;
-                margin-bottom: 15px;
-                margin-top: 15px;
-            }
-            label{
-                font-size: 20px;
-            }
-            .second,.sol{
-                border: 5px solid #2F2F2F;
-                background-color: #2F2F2F;
-                margin-top: 15px;
-                width: 50%;
-            }
-            .tr{
-                border: 5px solid #2F2F2F;
-                background-color: #2F2F2F;
-                margin-top: 15px;
-                width: 50%;
-            }
-            h1{
-                background-color: #2F2F2F;
-            }
-            .s{
-                display: grid;
-                place-items:center;
-            }
-            input,select{
-                border: 1px solid aqua;
-                border-radius: 10px;
-            }
-            p{
-                font-size: 35px;
-                animation: espaciado 10s alternate infinite;
-                color:#FFCB74;
-            }
-            hr{
-                margin-bottom: 50px;
-            }
-            @keyframes espaciado{
-                from{
-                    letter-spacing:0px;
-                }to{
-                    letter-spacing: 10px;
-                }
-            }
-        </style>
     </head>
     <body>
-        <image src='i2.png'>
-        <p>SISTEMA DE LEVANTAMIENTO DE REPORTES</p>
+        <h1>Sistema de levantamiento de reportes</h1>
+        <h2>Iniciar Sesion</h2>
         <hr>
-        <div class="s">
-        <div class="main">
-        <h1>Alumno</h1>
-        <form method="post" name="intro" action="LlenarFormato">
-                    <label>Turno</label>
-                    <select name="turno" id="select" onchange="mostrarGrupos()">
-                        <option value="Select">Selecciona el turno</option>
-                        <option value="m">Matutino</option>
-                        <option value="v">Vespertino</option>
-                    </select>
-                <div id="grupo"></div>
-                <input class="btn" type="submit" value="Entrar" onclick="validarDatos(event)">
+        <form action="ValidarLogin" method="post">
+            <p>Usuario</p>
+            <select name="select" id="select" onchange="mostrarInputs()">
+                <option value="none">Selecciona un usuario</option>
+                <option value="alm">Alumno</option>
+                <option value="doc">Docente</option>
+                <option value="adm">Administrador</option>
+            </select>
+            <div id="inp"></div>
         </form>
-        </div><div class="second">
-            <h1>¿Deseas levantar un reporte sobre una anomalia o irregularidad en tu computadora?</h1>
-        <form method="post" action="LevantarReporte">
-                <label>Ingresa tu numero de boleta </label><input id="bol" name="bol" onkeypress="return validarInt(event)" type="number">
-                <br>
-                <input class='btn'  type="submit" onclick="valiarFormReporte(event)" value="Acceder">
+        <h2>Registrar nuevo alumno</h2>
+        <hr>
+        <form method="post" action="Registrar">
+            <label>Boleta: </label><input type="number" placeholder="Ingrese su boleta" name="reg_bol">
+            <br>
+            <label>Password: </label><input type="password" placeholder="Ingrese su contraseña" name="reg_psw">
+            <br>
+            <input type="submit" value="Registrar nuevo alumno">
         </form>
-            </div>
-        <div class='tr'>
-        <h1>Consulta la bitacora aqui</h1>
-        <form method='post' action='ConsultarBitacora'>
-            <input class='btn' type='submit' value='Mostrar bitacora'>
-        </form>
-        </div>
-            <div class="sol">
-                <h1>Solicitud de modificacion de datos o baja de datos del laboratorio</h1>
-                <form method='post' action='EnviarDatos3'>
-                    <label>Asunto</label>
-                    <select name="sol" id="select" onchange="mostrarGrupos()">
-                        <option value="Modificacion de datos">Modificacion de datos</option>
-                        <option value="Baja de datos">Baja de datos</option>
-                    </select>
-                    <br>
-                    <label>Ingresa tu numero de boleta </label><input id="bol0" name="bolsol" onkeypress="return validarInt(event)" type="number">
-                    <br>
-                    <input class="btn" type="submit" onclick="verificarForm(event)" value="Enviar solicitud">
-                </form>
-            </div>
-        </div>
         <script>
-            function verificarForm(e){
-                if(document.getElementById("bol0").value<0||document.getElementById("bol0").value.split('').length!==10){
-                    e.preventDefault();
-                    alert("No has ingresado una boleta valida");
+            function mostrarInputs(){
+                var label_usu=document.createElement("LABEL");
+                var inp_usu=document.createElement("INPUT");
+                inp_usu.setAttribute("name","usu");
+                inp_usu.setAttribute("type","number");
+                var label_psw=document.createElement("LABEL");
+                var inp_psw=document.createElement("INPUT");
+                inp_psw.setAttribute("name","psw");
+                var div=document.getElementById("inp");
+                var submit=document.createElement("INPUT");
+                submit.setAttribute("type","submit");
+                submit.setAttribute("value","Iniciar Sesion");
+                div.innerHTML="";
+                switch(document.getElementById("select").value){
+                    case "alm":
+                        label_usu.innerHTML="Boleta";
+                        inp_usu.setAttribute("placeholder","Ingrese su boleta");
+                        label_psw.innerHTML="Password";
+                        inp_psw.setAttribute("placeholder","Ingrese su contraseña");
+                        div.appendChild(label_usu);
+                        div.appendChild(inp_usu);
+                        div.appendChild(label_psw);
+                        div.appendChild(inp_psw);
+                        break;
+                    case "doc":
+                        label_usu.innerHTML="Numero de identificacion";
+                        inp_usu.setAttribute("placeholder","Ingrese su numero de Id");
+                        label_psw.innerHTML="Password";
+                        inp_psw.setAttribute("placeholder","Ingrese su contraseña");
+                        div.appendChild(label_usu);
+                        div.appendChild(inp_usu);
+                        div.appendChild(label_psw);
+                        div.appendChild(inp_psw);
+                        break;
+                    case "adm":
+                        label_usu.innerHTML="Usuario";
+                        inp_usu.setAttribute("placeholder","Ingrese su usuario");
+                        label_psw.innerHTML="Password";
+                        inp_psw.setAttribute("placeholder","Ingrese su contraseña");
+                        div.appendChild(label_usu);
+                        div.appendChild(inp_usu);
+                        div.appendChild(label_psw);
+                        div.appendChild(inp_psw);
+                        break;
+                    default:
+                        alert("Debes seleccionar un tipo de usuario");
+                        break;
                 }
-            }
-            function validarBoleta(){
-                if(document.getElementById("bol").value<0||document.getElementById("bol").value.split('').length!==10){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-            function valiarFormReporte(e){
-                if(validarBoleta()===true){
-                    e.preventDefault();
-                    alert("No has ingresado una boleta valida");
-                }
-            }
-            function validarInt(e){
-                var teclado=(document.all)?e.keyCode:e.which;
-                if(teclado===8){return true;}
-                var patron=/[0-9]/;
-                var codigo=String.fromCharCode(teclado);
-                return patron.test(codigo);
-            }
-            function mostrarGrupos(){
-                document.getElementById("grupo").innerHTML="";
-                var label=document.createElement("LABEL");
-                var cls=document.createAttribute("class");
-                cls.value="inpClass";
-                label.setAttributeNode(cls);
-                var txt=document.createTextNode("Seleccione grupo: ");
-                label.appendChild(txt);
-                document.getElementById("grupo").appendChild(label);
-                var fecha_actual =new Date();
-                var opt="";
-                if(document.getElementById("select").value==="m"){
-                    if(fecha_actual.getMonth()<=6){//EXISTEN SEMESTRES PARES
-                        for(i=7;i<=10;i++){
-                            opt+=`<option value='4IM`+i+`'>`+"4IM"+i+`</option>`;
-                        }
-                        for(i=7;i<=10;i++){
-                            opt+=`<option value='6IM`+i+`'>`+"6IM"+i+`</option>`;
-                        }
-                    }else{//EXISTEN SEMESTRES IMPARES
-                        for(i=7;i<=10;i++){
-                            opt+=`<option value='3IM`+i+`'>`+"3IM"+i+`</option>`;
-                        }
-                        for(i=7;i<=10;i++){
-                            opt+=`<option value='5IM`+i+`'>`+"5IM"+i+`</option>`;
-                        }
-                    }
-                    var s=document.createElement("SELECT");
-                    s.innerHTML=opt;
-                    s.setAttribute("name","grupo");
-                    //s.setAttribute("id","grupo");
-                    document.getElementById("grupo").appendChild(s);
-                    //alert(s.value);
-                }else if(document.getElementById("select").value==="v"){
-                    if(fecha_actual.getMonth()<=6){//EXISTEN SEMESTRES PARES
-                        for(i=7;i<=10;i++){
-                            opt+=`<option value='4IV`+i+`'>`+"4IV"+i+`</option>`;
-                        }
-                        for(i=7;i<=10;i++){
-                            opt+=`<option value='6IV`+i+`'>`+"6IV"+i+`</option>`;
-                        }
-                    }else{//EXISTEN SEMESTRES IMPARES
-                        for(i=7;i<=10;i++){
-                            opt+=`<option value='3IV`+i+`'>`+"3IV"+i+`</option>`;
-                        }
-                        for(i=7;i<=10;i++){
-                            opt+=`<option value='5IV`+i+`'>`+"5IV"+i+`</option>`;
-                        }
-                    }
-                    var s=document.createElement("SELECT");
-                    s.innerHTML=opt;
-                    s.setAttribute("name","grupo");
-                    //s.setAttribute("id","grupo");
-                    document.getElementById("grupo").appendChild(s);                    
-                    //alert(s.value);
-                }
-            }
-            function validarDatos(e){
-                if(document.getElementById("select").value==="Select"){
-                    e.preventDefault();
-                    alert("No se envio el formulario. No has seleccionado turno.");
-                }
+                div.appendChild(submit);
             }
         </script>
     </body>
